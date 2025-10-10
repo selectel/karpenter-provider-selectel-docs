@@ -10,9 +10,9 @@
 
 У Karpenter есть информация о доступных конфигурациях и об их стоимости. Он знает, какие ресурсы нужны клиентскому приложению и автоматически подбирает оптимальную конфигурацию. Karpenter может управлять только нодами, которые он создал.
 
-Кластер, где вы будете использовать Karpenter, должен соответствовать [требованиям](#requirements). По умолчанию Karpenter не установлен в кластере, для начала работы [установите Karpenter](#install-karpenter) и [настройте](#configure-karpenter) его.
+Кластер, где вы будете использовать Karpenter, должен соответствовать [требованиям](#требования). По умолчанию Karpenter не установлен в кластере, для начала работы [установите Karpenter](#установить-karpenter) и [настройте](#настроить-karpenter) его.
 
-## Требования {#requirements}
+## Требования
 
 1. Кластер с версией Kubernetes 1.28 и выше. Вы можете [обновить версию кластера](https://docs.selectel.ru/managed-kubernetes/clusters/upgrade-version/).
 2. В кластере минимум одна нода, в которой не менее 2 vCPU и 4 GiB RAM.
@@ -22,7 +22,7 @@
 - добавить в кластер две ноды, в каждой из которых не менее 2 vCPU и 4 GiB RAM;
 - выключить [автомасштабирование](https://docs.selectel.ru/managed-kubernetes/node-groups/cluster-autoscaler/) и [автовосстановление](https://docs.selectel.ru/managed-kubernetes/node-groups/reinstall-nodes/).
 
-## Установить Karpenter {#install-karpenter}
+## Установить Karpenter
 
 Экспортируйте в переменную окружения KUBECONFIG путь к kubeconfig-файлу.
 
@@ -32,7 +32,7 @@ export KUBECONFIG=<path>
 
 Укажите <path> — путь к kubeconfig-файлу имя_кластера.yaml
 
-Добавьте официальный репозиторий Helm и установите Karpenter:
+Установите Karpenter с помощью Helm:
 
 ```bash
 helm install karpenter-helmrelease oci://ghcr.io/selectel/mks-charts/karpenter:0.1.0 \
@@ -42,7 +42,7 @@ helm install karpenter-helmrelease oci://ghcr.io/selectel/mks-charts/karpenter:0
 
 Укажите `<cluster_id>` — ID кластера Managed Kubernetes, можно посмотреть в [панели управления](https://my.selectel.ru/vpc/default/mks/): в верхнем меню нажмите **Продукты** → **Managed Kubernetes** → страница кластера → скопируйте ID под именем кластера, рядом с регионом и пулом.
 
-## Настроить Karpenter {#configure-karpenter}
+## Настроить Karpenter
 
 ## 1. Создать NodeClass
 
@@ -67,7 +67,7 @@ helm install karpenter-helmrelease oci://ghcr.io/selectel/mks-charts/karpenter:0
 
   Здесь:
 
-  - `сфеупщкшуы` — [тип сетевого диска](https://docs.selectel.ru/cloud-servers/volumes/about-network-volumes/#network-volume-types-list). ;
+  - `universal` — [тип сетевого диска](https://docs.selectel.ru/cloud-servers/volumes/about-network-volumes/#network-volume-types-list). ;
   - `30` — размер сетевого диска в ГБ.
 
 2. Примените манифест:
