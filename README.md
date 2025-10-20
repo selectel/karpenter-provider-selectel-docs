@@ -32,10 +32,19 @@ export KUBECONFIG=<path>
 
 Укажите <path> — путь к kubeconfig-файлу имя_кластера.yaml
 
-Установите Karpenter с помощью Helm:
+Установите Karpenter с помощью Helm 3.17+:
 
 ```bash
 helm install karpenter-helmrelease oci://ghcr.io/selectel/mks-charts/karpenter:0.1.0 \
+--namespace kube-system \
+--set controller.settings.clusterID=$(<cluster_id>)
+```
+
+Helm 3.16 и ниже
+
+```bash
+helm install karpenter-helmrelease oci://ghcr.io/selectel/mks-charts/karpenter \
+--version=0.1.0 \
 --namespace kube-system \
 --set controller.settings.clusterID=$(<cluster_id>)
 ```
